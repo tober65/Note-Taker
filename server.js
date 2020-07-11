@@ -17,7 +17,7 @@ function readNotesFromFile() {
         if (error) {
             return console.log(error);
         }
-        // console.log("Reading: ", data);
+        console.log("Reading: ", data);
         notes = JSON.parse(data);
     });
 }
@@ -27,7 +27,7 @@ function writeNotesToFile() {
         if (error) {
             return console.log(error);
         }
-        // console.log("Writing", JSON.stringify(notes));
+        console.log("Writing", JSON.stringify(notes));
     });
 }
 
@@ -63,11 +63,14 @@ app.post("/api/notes", (req, res) => {
     let newNote = req.body;
     newNote.id = getNextId();
 
-    // console.log("Pushing", newNote);
+    console.log("Pushing", newNote);
 
     notes.push(newNote);
 
     writeNotesToFile();
+
+    res.sendStatus(200)
+
 });
 
 app.delete("/api/notes/:id", (req, res) => {
@@ -75,11 +78,13 @@ app.delete("/api/notes/:id", (req, res) => {
     // This works because of our body parsing middleware
     let id = parseInt(req.params.id);
 
-    // console.log("Deleting note " + id);
+    console.log("Deleting note " + id);
 
     notes = notes.filter((elem) => {return elem.id !== id});
 
     writeNotesToFile();
+
+    res.sendStatus(200)
 });
 
 // Basic route that sends the user first to the AJAX Page
