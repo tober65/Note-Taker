@@ -32,7 +32,7 @@ function writeNotesToFile() {
 }
 
 function getNextId() {
-    let i = 0;
+    let i = 1;
     while (!isUniqueId(i)) {
         i++;
     }
@@ -69,7 +69,7 @@ app.post("/api/notes", (req, res) => {
 
     writeNotesToFile();
 
-    res.sendStatus(200)
+    res.sendStatus(200);
 
 });
 
@@ -84,7 +84,7 @@ app.delete("/api/notes/:id", (req, res) => {
 
     writeNotesToFile();
 
-    res.sendStatus(200)
+    res.sendStatus(200);
 });
 
 // Basic route that sends the user first to the AJAX Page
